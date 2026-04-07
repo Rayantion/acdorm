@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Tells search engines where to find your map
+Sitemap: https://www.jieren.my.id/sitemap.xml
