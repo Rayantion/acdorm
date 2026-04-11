@@ -209,17 +209,29 @@
                             </div>
                         </div>
                         <!-- Language Toggle (prominent, easy to find) -->
-                        <button id="btn-lang"
-                            class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all border-2 border-blue-200 dark:border-blue-800 font-bold text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="2" x2="22" y1="12" y2="12" />
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                            </svg>
-                            <span id="langText" class="text-sm font-bold tracking-wide">EN</span>
-                        </button>
+                        <div class="flex flex-col items-end gap-1.5">
+                            <button id="btn-contact"
+                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/60 transition-all border border-purple-200 dark:border-purple-800 font-bold text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 whitespace-nowrap">
+                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                <span id="contactText" data-i18n="contactMe">Contact Me</span>
+                            </button>
+                            <button id="btn-lang"
+                                class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all border-2 border-blue-200 dark:border-blue-800 font-bold text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="2" x2="22" y1="12" y2="12" />
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                </svg>
+                                <span id="langText" class="text-sm font-bold tracking-wide">EN</span>
+                            </button>
+                        </div>
                     </div>
                     <p class="text-gray-500 dark:text-gray-400 text-sm sm:text-base mt-1" data-i18n="subtitle">
                         Monitor dormitory air conditioning credits instantly.
@@ -287,16 +299,6 @@
                                 <polyline points="10 9 9 9 8 9" />
                             </svg>
                             <span data-i18n="lateForm">Late Arrive Form</span>
-                        </a>
-                        <a href="mailto:aaron@jieren.my.id?subject=[介仁冷氣查詢]%20回報問題或建議"
-                            class="flex items-center gap-1 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg sm:rounded-xl bg-purple-50/90 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all border border-purple-200/80 dark:border-purple-800/50 text-xs sm:text-sm font-semibold">
-                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            <span data-i18n="contact">Contact</span>
                         </a>
                     </div>
 
@@ -543,7 +545,7 @@
                 tcuSystem: "TCU System",
                 moodleSystem: "Moodle",
                 lateForm: "Late Arrive Form",
-                contact: "Contact",
+                contactMe: "Contact Me",
                 statsTitle: "Live Usage Stats",
                 statsTotal: "Total",
                 statsMonthly: "This Month",
@@ -574,7 +576,7 @@
                 tcuSystem: "TCU 校務系統",
                 moodleSystem: "Moodle 學習系統",
                 lateForm: "晚歸請假表單",
-                contact: "聯絡我們",
+                contactMe: "聯絡我",
                 statsTitle: "即時查詢統計",
                 statsTotal: "總計",
                 statsMonthly: "本月",
@@ -610,6 +612,8 @@
         const htmlRoot = document.documentElement;
         const btnLang = document.getElementById('btn-lang');
         const langText = document.getElementById('langText');
+        const btnContact = document.getElementById('btn-contact');
+        const contactText = document.getElementById('contactText');
         const btnTheme = document.getElementById('btn-theme');
         const iconSun = document.getElementById('icon-sun');
         const iconMoon = document.getElementById('icon-moon');
@@ -668,6 +672,32 @@
             window.history.pushState({}, '', newUrl);
             
             updateLanguage();
+        });
+
+        // --- Contact Me: Copy Email ---
+        const EMAIL = 'aaron@jieren.my.id';
+        btnContact.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(EMAIL);
+            } catch {
+                // Fallback for browsers without clipboard API
+                const ta = document.createElement('textarea');
+                ta.value = EMAIL;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            // Show the email on the button so user knows what was copied
+            const originalText = contactText.textContent;
+            contactText.textContent = EMAIL;
+            btnContact.classList.add('!bg-green-50', '!dark:bg-green-900/40', '!text-green-600', '!dark:!text-green-400', '!border-green-200', '!dark:!border-green-800');
+            setTimeout(() => {
+                contactText.textContent = originalText;
+                btnContact.classList.remove('!bg-green-50', '!dark:bg-green-900/40', '!text-green-600', '!dark:!text-green-400', '!border-green-200', '!dark:!border-green-800');
+            }, 2000);
         });
 
         // --- Theme Switcher ---
