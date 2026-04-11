@@ -182,30 +182,44 @@
                 <!-- Header (Moved above the box) -->
                 <div
                     class="text-left space-y-1 sm:space-y-2 animate-fade-in w-full flex flex-col items-start px-1 sm:px-0">
-                    <div class="flex flex-row items-center gap-3 sm:gap-4 mb-1">
-                        <!-- Fixed Snowflake Logo -->
-                        <div
-                            class="inline-flex items-center justify-center p-2 sm:p-3 bg-blue-100/90 dark:bg-blue-900/40 backdrop-blur-sm rounded-xl sm:rounded-2xl text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 shadow-sm shrink-0">
-                            <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <line x1="12" y1="2" x2="12" y2="22"></line>
-                                <path d="m20 16-4-4 4-4"></path>
-                                <path d="m4 8 4 4-4 4"></path>
-                                <path d="m16 4-4 4-4-4"></path>
-                                <path d="m8 20 4-4 4 4"></path>
+                    <div class="flex flex-row items-center justify-between w-full mb-1">
+                        <div class="flex flex-row items-center gap-3 sm:gap-4">
+                            <!-- Fixed Snowflake Logo -->
+                            <div
+                                class="inline-flex items-center justify-center p-2 sm:p-3 bg-blue-100/90 dark:bg-blue-900/40 backdrop-blur-sm rounded-xl sm:rounded-2xl text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 shadow-sm shrink-0">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                                    <path d="m20 16-4-4 4-4"></path>
+                                    <path d="m4 8 4 4-4 4"></path>
+                                    <path d="m16 4-4 4-4-4"></path>
+                                    <path d="m8 20 4-4 4 4"></path>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col items-start justify-center">
+                                <h1 class="text-xl sm:text-3xl font-bold tracking-tight" data-i18n="title">AC Status Portal
+                                </h1>
+                                <span
+                                    class="inline-block mt-0.5 sm:mt-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wide bg-indigo-100/90 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50 backdrop-blur-sm"
+                                    data-i18n="campusBadge">
+                                    Jieren Campus Only
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Language Toggle (prominent, easy to find) -->
+                        <button id="btn-lang"
+                            class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all border-2 border-blue-200 dark:border-blue-800 font-bold text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" x2="22" y1="12" y2="12" />
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                             </svg>
-                        </div>
-                        <div class="flex flex-col items-start justify-center">
-                            <h1 class="text-xl sm:text-3xl font-bold tracking-tight" data-i18n="title">AC Status Portal
-                            </h1>
-                            <span
-                                class="inline-block mt-0.5 sm:mt-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wide bg-indigo-100/90 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50 backdrop-blur-sm"
-                                data-i18n="campusBadge">
-                                Jieren Campus Only
-                            </span>
-                        </div>
+                            <span id="langText" class="text-sm font-bold tracking-wide">EN</span>
+                        </button>
                     </div>
                     <p class="text-gray-500 dark:text-gray-400 text-sm sm:text-base mt-1" data-i18n="subtitle">
                         Monitor dormitory air conditioning credits instantly.
@@ -219,18 +233,6 @@
                     <!-- Utility Buttons Row -->
                     <div
                         class="flex flex-wrap justify-center sm:justify-start items-center gap-1.5 sm:gap-2 mb-3 sm:mb-5 pb-3 sm:pb-5 border-b border-gray-100 dark:border-gray-700/50">
-                        <button id="btn-lang"
-                            class="flex items-center gap-1 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg sm:rounded-xl bg-gray-100/80 dark:bg-gray-800/60 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all border border-gray-200/80 dark:border-gray-700/50 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="2" x2="22" y1="12" y2="12" />
-                                <path
-                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                            </svg>
-                            <span id="langText" class="text-xs sm:text-sm font-bold tracking-wide">EN</span>
-                        </button>
                         <button id="btn-theme"
                             class="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-100/80 dark:bg-gray-800/60 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all border border-gray-200/80 dark:border-gray-700/50 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <svg id="icon-sun" class="w-4 h-4 sm:w-5 sm:h-5 hidden" xmlns="http://www.w3.org/2000/svg"
@@ -585,7 +587,7 @@
 
         // --- State Variables ---
         const urlParams = new URLSearchParams(window.location.search);
-        let currentLang = urlParams.get('lang') === 'zh' ? 'zh' : 'en';
+        let currentLang = urlParams.get('lang') === 'en' ? 'en' : 'zh';
         let isDark = true;
         let dormType = '1'; // '1' = Male, '0' = Female
         let roomID = '';
