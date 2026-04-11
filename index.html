@@ -588,7 +588,7 @@
         // --- State Variables ---
         const urlParams = new URLSearchParams(window.location.search);
         let currentLang = urlParams.get('lang') === 'en' ? 'en' : 'zh';
-        let isDark = true;
+        let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         let dormType = '1'; // '1' = Male, '0' = Female
         let roomID = '';
         let isValid = false;
@@ -1021,6 +1021,16 @@
 
         // --- Initialization ---
         window.onload = () => {
+            // Sync theme with device preference
+            if (isDark) {
+                htmlRoot.classList.add('dark');
+                iconSun.classList.add('hidden');
+                iconMoon.classList.remove('hidden');
+            } else {
+                htmlRoot.classList.remove('dark');
+                iconSun.classList.remove('hidden');
+                iconMoon.classList.add('hidden');
+            }
             updateLanguage();
             fetchStats();
             initCanvas();
