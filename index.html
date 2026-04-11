@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="zh-TW" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Instantly check dormitory air conditioning credit balances for TCU dorms. 介仁冷氣查詢 - 即時監控宿舍冷氣電費餘額" />
+    <meta name="description" content="即時查詢慈濟大學介仁校區宿舍冷氣電費餘額，支援男女宿舍，簡單快速輸入房號即可查詢。介仁冷氣、宿舍冷氣餘額、TCU dormitory air conditioning credits" />
     <meta name="keywords" content="介仁冷氣, 冷氣查詢, 宿舍冷氣, 介仁校區, TCU宿舍, 冷氣餘額, 空調, AC credits, 東大, Tunghai, 東海大學, air conditioning credits">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="zh-TW, en">
@@ -87,6 +87,69 @@
             opacity: 0.8;
         }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "介仁冷氣查詢 | AC Status Portal",
+        "description": "即時查詢慈濟大學介仁校區宿舍冷氣電費餘額，支援男女宿舍，簡單快速輸入房號即可查詢。",
+        "url": "https://www.jieren.my.id/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires a modern web browser. Works on desktop and mobile.",
+        "author": {
+            "@type": "Person",
+            "name": "Rayantion",
+            "email": "aaron@jieren.my.id",
+            "url": "https://github.com/Rayantion/acdorm"
+        },
+        "sameAs": [
+            "https://github.com/Rayantion/acdorm"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "如何查詢宿舍冷氣餘額？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "在首頁輸入房間號碼（例如 A201），選擇男女宿舍後點擊「查詢冷氣餘額」即可即時查看冷氣電費剩餘金額。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "這個系統支援哪些宿舍？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "目前僅支援慈濟大學介仁校區的男女宿舍冷氣餘額查詢。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "查詢不到我的房間怎麼辦？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "請確認房號格式正確（例：A201）。若仍查不到，可能是房間尚未註冊於系統中。請聯絡宿舍管理員或發送電子郵件至 aaron@jieren.my.id。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "這個服務免費嗎？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "是的，介仁冷氣查詢系統完全免費，專為慈濟大學介仁校區住宿學生提供。"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body
@@ -222,6 +285,16 @@
                                 <polyline points="10 9 9 9 8 9" />
                             </svg>
                             <span data-i18n="lateForm">Late Arrive Form</span>
+                        </a>
+                        <a href="mailto:aaron@jieren.my.id?subject=[介仁冷氣查詢]%20回報問題或建議"
+                            class="flex items-center gap-1 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg sm:rounded-xl bg-purple-50/90 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all border border-purple-200/80 dark:border-purple-800/50 text-xs sm:text-sm font-semibold">
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            <span data-i18n="contact">Contact</span>
                         </a>
                     </div>
 
@@ -468,6 +541,7 @@
                 tcuSystem: "TCU System",
                 moodleSystem: "Moodle",
                 lateForm: "Late Arrive Form",
+                contact: "Contact",
                 statsTitle: "Live Usage Stats",
                 statsTotal: "Total",
                 statsMonthly: "This Month",
@@ -498,6 +572,7 @@
                 tcuSystem: "TCU 校務系統",
                 moodleSystem: "Moodle 學習系統",
                 lateForm: "晚歸請假表單",
+                contact: "聯絡我們",
                 statsTitle: "即時查詢統計",
                 statsTotal: "總計",
                 statsMonthly: "本月",
