@@ -169,7 +169,7 @@
     <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <main class="w-full max-w-5xl z-10 flex flex-col items-center justify-center h-full min-h-0 relative">
+    <main class="w-full max-w-5xl z-10 flex flex-col items-center justify-center h-full min-h-0 relative overflow-y-auto pb-20">
 
         <!-- Main Layout Container -->
         <div
@@ -480,6 +480,98 @@
                     </div>
                 </div>
 
+                <!-- Bus Schedule Card -->
+                <div id="busCard"
+                    class="bg-white/95 dark:bg-[#1e293b]/95 backdrop-blur-xl border border-gray-200/80 dark:border-gray-700/50 rounded-2xl sm:rounded-3xl shadow-2xl transition-colors overflow-hidden">
+                    <!-- Header / Toggle -->
+                    <button id="busToggleBtn" type="button"
+                        class="w-full flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 text-left focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-inset rounded-2xl sm:rounded-3xl">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="p-1.5 sm:p-2 bg-emerald-100/90 dark:bg-emerald-900/40 rounded-lg sm:rounded-xl">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="6" width="18" height="12" rx="2"/>
+                                    <path d="M6 10h12"/>
+                                    <path d="M6 14h2"/>
+                                    <path d="M16 14h2"/>
+                                    <path d="M3 18h18"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white"
+                                    data-i18n="busSchedule">Bus Schedule</h3>
+                                <p id="busNextSummary" class="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                                    --
+                                </p>
+                            </div>
+                        </div>
+                        <svg id="busExpandIcon" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-300"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+
+                    <!-- Expandable Content -->
+                    <div id="busContent"
+                        class="hidden border-t border-gray-200 dark:border-gray-700/50 px-4 sm:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 max-h-[380px] sm:max-h-[440px] overflow-y-auto">
+                        <!-- Route Tabs -->
+                        <div class="flex flex-wrap gap-1.5 sm:gap-2" id="busTabs" role="tablist">
+                            <button data-route="main-jieren" role="tab" aria-selected="true"
+                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeMainJieren">Main ↔ Jieren</span>
+                            </button>
+                            <button data-route="main-jianguo" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeMainJianguo">Main ↔ Jianguo</span>
+                            </button>
+                            <button data-route="jieren-jianguo" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeJierenJianguo">Jieren ↔ Jianguo</span>
+                            </button>
+                            <button data-route="noon-circular" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeNoonCircular">Noon Circular</span>
+                            </button>
+                        </div>
+
+                        <!-- Next Bus Countdown -->
+                        <div
+                            class="bg-emerald-50/80 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center">
+                            <p class="text-[10px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1"
+                                data-i18n="nextBus">Next Bus</p>
+                            <div id="busCountdown" class="text-2xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-300 tracking-tight">
+                                --
+                            </div>
+                            <p id="busCountdownLabel" class="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                                --
+                            </p>
+                        </div>
+
+                        <!-- All Departures -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                                    data-i18n="allDepartures">All Departures</p>
+                                <span id="busDayTypeBadge"
+                                    class="text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                    Weekdays
+                                </span>
+                            </div>
+                            <div id="busDepartures"
+                                class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2 max-h-[140px] sm:max-h-[180px] overflow-y-auto pr-1">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <p class="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 text-center pt-1 border-t border-gray-100 dark:border-gray-700/50"
+                            data-i18n="busNote">
+                            Schedules subject to change. Check official TCU notices.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
@@ -552,7 +644,21 @@
                 statsThisWeek: "This Week",
                 statsToday: "Today",
                 releaseDate: "Released since 2026/09/03",
-                readMore: "Read more..."
+                readMore: "Read more...",
+                busSchedule: "Bus Schedule",
+                busToggle: "Show Bus Schedule",
+                busHide: "Hide Bus Schedule",
+                nextBus: "Next Bus",
+                noMoreBuses: "No more buses today",
+                allDepartures: "All Departures",
+                minutesUntil: "min",
+                routeMainJieren: "Main ↔ Jieren",
+                routeMainJianguo: "Main ↔ Jianguo",
+                routeJierenJianguo: "Jieren ↔ Jianguo",
+                routeNoonCircular: "Noon Circular",
+                weekdaySchedule: "Weekdays",
+                weekendSchedule: "Weekends & Summer",
+                busNote: "Schedules subject to change. Check official TCU notices."
             },
             zh: {
                 title: "冷氣餘額查詢",
@@ -583,7 +689,21 @@
                 statsThisWeek: "本週",
                 statsToday: "今日",
                 releaseDate: "自 2026/09/03 上線",
-                readMore: "顯示更多..."
+                readMore: "顯示更多...",
+                busSchedule: "校車時刻表",
+                busToggle: "顯示校車時刻",
+                busHide: "隱藏校車時刻",
+                nextBus: "下一班車",
+                noMoreBuses: "今日已無班次",
+                allDepartures: "全部班次",
+                minutesUntil: "分鐘",
+                routeMainJieren: "中央 ↔ 介仁",
+                routeMainJianguo: "中央 ↔ 建國",
+                routeJierenJianguo: "介仁 ↔ 建國",
+                routeNoonCircular: "中午環線試辦",
+                weekdaySchedule: "平日班次",
+                weekendSchedule: "假日及暑期班次",
+                busNote: "時刻表僅供參考，請以慈濟大學官方公告為準。"
             }
         };
 
@@ -656,6 +776,9 @@
             });
             inputRoom.placeholder = t.placeholder;
             langText.textContent = currentLang === 'en' ? 'EN' : '中';
+
+            // Update bus summary if bus elements exist
+            if (busCountdown) renderBusSchedule();
 
             // Update button text contextually if loading
             if (isLoading) {
@@ -1047,6 +1170,175 @@
                 // Reset to mobile default
                 footerContent.classList.add(isFooterExpanded ? 'max-h-[300px]' : 'max-h-[20px]');
             }
+        });
+
+        // --- Bus Schedule ---
+        const busSchedule = {
+            'main-jieren': {
+                name: { en: 'Main ↔ Jieren', zh: '中央 ↔ 介仁' },
+                weekdays: ['07:20', '08:10', '12:00', '12:50', '16:30', '17:20', '18:10', '21:00'],
+                weekends: ['08:00', '12:00', '17:00']
+            },
+            'main-jianguo': {
+                name: { en: 'Main ↔ Jianguo', zh: '中央 ↔ 建國' },
+                weekdays: ['07:30', '08:20', '12:10', '13:00', '16:40', '17:30', '18:20', '21:10'],
+                weekends: ['08:00', '12:00', '17:00']
+            },
+            'jieren-jianguo': {
+                name: { en: 'Jieren ↔ Jianguo', zh: '介仁 ↔ 建國' },
+                weekdays: ['07:40', '08:30', '12:20', '13:10', '16:50', '17:40', '18:30'],
+                weekends: ['08:00', '12:00', '17:00']
+            },
+            'noon-circular': {
+                name: { en: 'Noon Circular', zh: '中午環線試辦' },
+                weekdays: ['13:00', '13:30'],
+                weekends: []
+            }
+        };
+
+        let currentBusRoute = 'main-jieren';
+        let busRefreshInterval = null;
+        let isBusExpanded = false;
+
+        const busToggleBtn = document.getElementById('busToggleBtn');
+        const busContent = document.getElementById('busContent');
+        const busExpandIcon = document.getElementById('busExpandIcon');
+        const busTabs = document.getElementById('busTabs');
+        const busCountdown = document.getElementById('busCountdown');
+        const busCountdownLabel = document.getElementById('busCountdownLabel');
+        const busDepartures = document.getElementById('busDepartures');
+        const busDayTypeBadge = document.getElementById('busDayTypeBadge');
+        const busNextSummary = document.getElementById('busNextSummary');
+
+        function isWeekendOrSummer() {
+            const now = new Date();
+            const day = now.getDay();
+            return day === 0 || day === 6;
+        }
+
+        function parseTime(timeStr) {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function getNextBus(routeKey) {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const isWeekend = isWeekendOrSummer();
+            const schedule = busSchedule[routeKey];
+            const times = isWeekend ? schedule.weekends : schedule.weekdays;
+
+            if (!times || times.length === 0) {
+                return { next: null, nextMinutes: Infinity, currentMinutes, remaining: [] };
+            }
+
+            let nextTime = null;
+            let nextMinutes = Infinity;
+
+            for (const t of times) {
+                const mins = parseTime(t);
+                if (mins > currentMinutes && mins < nextMinutes) {
+                    nextMinutes = mins;
+                    nextTime = t;
+                }
+            }
+
+            const remaining = times.filter(t => parseTime(t) > currentMinutes);
+            return { next: nextTime, nextMinutes, currentMinutes, remaining };
+        }
+
+        function formatMinutesDiff(currentMinutes, nextMinutes) {
+            if (nextMinutes === null || nextMinutes === Infinity) return null;
+            let diff = nextMinutes - currentMinutes;
+            if (diff < 0) diff += 24 * 60;
+            return diff;
+        }
+
+        function renderBusSchedule() {
+            const route = busSchedule[currentBusRoute];
+            const isWeekend = isWeekendOrSummer();
+            const times = isWeekend ? route.weekends : route.weekdays;
+            const { next, nextMinutes, currentMinutes } = getNextBus(currentBusRoute);
+
+            const dayLabelKey = isWeekend ? 'weekendSchedule' : 'weekdaySchedule';
+            const dayLabel = translations[currentLang][dayLabelKey] || (isWeekend ? 'Weekends & Summer' : 'Weekdays');
+            busDayTypeBadge.textContent = dayLabel;
+
+            const diff = formatMinutesDiff(currentMinutes, nextMinutes);
+            if (diff !== null) {
+                busCountdown.textContent = String(diff);
+                busCountdownLabel.textContent = translations[currentLang].minutesUntil || 'min';
+                const minText = translations[currentLang].minutesUntil || 'min';
+                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next} (${diff} ${minText})`;
+            } else {
+                busCountdown.textContent = '--';
+                busCountdownLabel.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
+                busNextSummary.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
+            }
+
+            while (busDepartures.firstChild) {
+                busDepartures.removeChild(busDepartures.firstChild);
+            }
+            if (times && times.length > 0) {
+                times.forEach(t => {
+                    const tMins = parseTime(t);
+                    const isPast = tMins <= currentMinutes;
+                    const isNext = t === next;
+                    const el = document.createElement('div');
+                    el.className = `flex items-center justify-center px-1 py-1 sm:px-2 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-medium transition-colors
+                        ${isNext ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 font-bold' :
+                        isPast ? 'bg-gray-50 dark:bg-gray-800/30 text-gray-400 dark:text-gray-600 line-through' :
+                        'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700/50'}`;
+                    el.textContent = t;
+                    busDepartures.appendChild(el);
+                });
+            } else {
+                const emptyMsg = document.createElement('p');
+                emptyMsg.className = 'col-span-full text-center text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 py-2';
+                emptyMsg.textContent = translations[currentLang].noMoreBuses || 'No service today';
+                busDepartures.appendChild(emptyMsg);
+            }
+        }
+
+        function setBusRoute(routeKey) {
+            currentBusRoute = routeKey;
+            busTabs.querySelectorAll('.bus-tab').forEach(btn => {
+                const isActive = btn.dataset.route === routeKey;
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                if (isActive) {
+                    btn.className = 'bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500';
+                } else {
+                    btn.className = 'bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500';
+                }
+            });
+            renderBusSchedule();
+        }
+
+        function toggleBus() {
+            isBusExpanded = !isBusExpanded;
+            if (isBusExpanded) {
+                busContent.classList.remove('hidden');
+                busExpandIcon.classList.add('rotate-180');
+                if (!busRefreshInterval) {
+                    busRefreshInterval = setInterval(renderBusSchedule, 60000);
+                }
+                renderBusSchedule();
+            } else {
+                busContent.classList.add('hidden');
+                busExpandIcon.classList.remove('rotate-180');
+                if (busRefreshInterval) {
+                    clearInterval(busRefreshInterval);
+                    busRefreshInterval = null;
+                }
+            }
+        }
+
+        busToggleBtn.addEventListener('click', toggleBus);
+
+        busTabs.addEventListener('click', (e) => {
+            const btn = e.target.closest('.bus-tab');
+            if (!btn) return;
+            setBusRoute(btn.dataset.route);
         });
 
         // --- Initialization ---
