@@ -519,24 +519,16 @@
                         <!-- Route Tabs -->
                         <div class="flex flex-wrap gap-1.5 sm:gap-2" id="busTabs" role="tablist">
                             <button data-route="main-jieren" role="tab" aria-selected="true"
-                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeMainJieren">Main ↔ Jieren</span>
                             </button>
                             <button data-route="main-jianguo" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeMainJianguo">Main ↔ Jianguo</span>
                             </button>
                             <button data-route="jieren-jianguo" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeJierenJianguo">Jieren ↔ Jianguo</span>
-                            </button>
-                            <button data-route="jianguo-to-jieren" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <span data-i18n="routeJianguoToJieren">Jianguo → Jieren</span>
-                            </button>
-                            <button data-route="noon-circular" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <span data-i18n="routeNoonCircular">Noon Circular</span>
                             </button>
                         </div>
 
@@ -661,6 +653,12 @@
                 routeJierenJianguo: "Jieren ↔ Jianguo",
                 routeJianguoToJieren: "Jianguo → Jieren",
                 routeNoonCircular: "Noon Circular",
+                busTypeSchool: "School Bus",
+                busTypeShuttle: "Shuttle",
+                busTypeTaxi: "Taxi",
+                busError: "Failed to load schedule",
+                busLoading: "Loading...",
+                busDateLabel: "Today",
                 weekdaySchedule: "Weekdays",
                 weekendSchedule: "Weekends & Summer",
                 busNote: "Schedules subject to change. Check official TCU notices."
@@ -707,6 +705,12 @@
                 routeJierenJianguo: "介仁 ↔ 建國",
                 routeJianguoToJieren: "建國 → 介仁",
                 routeNoonCircular: "中午環線試辦",
+                busTypeSchool: "校車",
+                busTypeShuttle: "交通車",
+                busTypeTaxi: "計程車",
+                busError: "載入失敗",
+                busLoading: "載入中...",
+                busDateLabel: "今日",
                 weekdaySchedule: "平日班次",
                 weekendSchedule: "假日及暑期班次",
                 busNote: "時刻表僅供參考，請以慈濟大學官方公告為準。"
@@ -1179,33 +1183,24 @@
         });
 
         // --- Bus Schedule ---
-        const busSchedule = {
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSyxijKX2m27fSmnP5b1nEYvR3HU6lGeVbIEYbG_5bVew6rF-3VWWjYwxJbwaH8llF-msq8L20De_hJ/pub?output=csv';
+
+        let busSchedule = {
             'main-jieren': {
                 name: { en: 'Main ↔ Jieren', zh: '中央 ↔ 介仁' },
-                weekdays: ['07:20', '08:10', '12:00', '12:50', '16:30', '17:20', '18:10', '21:00'],
-                weekends: ['08:00', '12:00', '17:00']
+                times: []
             },
             'main-jianguo': {
                 name: { en: 'Main ↔ Jianguo', zh: '中央 ↔ 建國' },
-                weekdays: ['07:30', '08:20', '12:10', '13:00', '16:40', '17:30', '18:20', '21:10'],
-                weekends: ['08:00', '12:00', '17:00']
+                times: []
             },
             'jieren-jianguo': {
                 name: { en: 'Jieren ↔ Jianguo', zh: '介仁 ↔ 建國' },
-                weekdays: ['07:40', '08:30', '12:20', '13:10', '16:50', '17:40', '18:30'],
-                weekends: ['08:00', '12:00', '17:00']
-            },
-            'noon-circular': {
-                name: { en: 'Noon Circular', zh: '中午環線試辦' },
-                weekdays: ['13:00', '13:30'],
-                weekends: []
-            },
-            'jianguo-to-jieren': {
-                name: { en: 'Jianguo → Jieren', zh: '建國 → 介仁' },
-                weekdays: ['07:55', '08:45', '12:35', '13:25', '17:05', '17:55', '18:45'],
-                weekends: ['08:15', '12:15', '17:15']
+                times: []
             }
         };
+        let busCsvLoaded = false;
+        let busCsvError = false;
 
         let currentBusRoute = 'main-jieren';
         let busRefreshInterval = null;
@@ -1224,15 +1219,13 @@
 
         function getTaiwanTime() {
             const now = new Date();
-            // Convert local time to UTC, then add Taiwan offset (UTC+8)
             const utcMs = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
             return new Date(utcMs + 8 * 60 * 60 * 1000);
         }
 
-        function isWeekendOrSummer() {
-            const taiwanTime = getTaiwanTime();
-            const day = taiwanTime.getDay();
-            return day === 0 || day === 6;
+        function getTodayDateString() {
+            const t = getTaiwanTime();
+            return `${t.getFullYear()}/${t.getMonth() + 1}/${t.getDate()}`;
         }
 
         function parseTime(timeStr) {
@@ -1240,30 +1233,90 @@
             return h * 60 + m;
         }
 
+        async function fetchBusSchedule() {
+            try {
+                const response = await fetch(CSV_URL);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const csvText = await response.text();
+                const lines = csvText.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+
+                // Reset schedules
+                for (const key in busSchedule) {
+                    busSchedule[key].times = [];
+                }
+
+                const todayStr = getTodayDateString();
+                const todayRows = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    const cols = line.split(',');
+                    if (cols.length < 16) continue;
+
+                    const dateStr = cols[2] ? cols[2].trim() : '';
+                    if (dateStr !== todayStr) continue;
+
+                    const mainTime = cols[7] ? cols[7].trim() : '';
+                    const jierenTime = cols[8] ? cols[8].trim() : '';
+                    const jianguoTime = cols[9] ? cols[9].trim() : '';
+                    const company = cols[14] ? cols[14].trim() : '';
+                    const typeCode = cols[15] ? cols[15].trim() : '';
+                    const typeName = cols[16] ? cols[16].trim() : '';
+
+                    const entryBase = { company, typeCode, typeName };
+
+                    if (mainTime) {
+                        busSchedule['main-jieren'].times.push({ ...entryBase, time: mainTime });
+                        busSchedule['main-jianguo'].times.push({ ...entryBase, time: mainTime });
+                    }
+                    if (jierenTime) {
+                        busSchedule['main-jieren'].times.push({ ...entryBase, time: jierenTime });
+                        busSchedule['jieren-jianguo'].times.push({ ...entryBase, time: jierenTime });
+                    }
+                    if (jianguoTime) {
+                        busSchedule['main-jianguo'].times.push({ ...entryBase, time: jianguoTime });
+                        busSchedule['jieren-jianguo'].times.push({ ...entryBase, time: jianguoTime });
+                    }
+                }
+
+                // Sort times within each route
+                for (const key in busSchedule) {
+                    busSchedule[key].times.sort((a, b) => parseTime(a.time) - parseTime(b.time));
+                }
+
+                busCsvLoaded = true;
+                busCsvError = false;
+            } catch (err) {
+                console.error('Bus schedule fetch failed:', err);
+                busCsvError = true;
+                busCsvLoaded = true;
+            }
+        }
+
         function getNextBus(routeKey) {
             const taiwanTime = getTaiwanTime();
             const currentMinutes = taiwanTime.getHours() * 60 + taiwanTime.getMinutes();
-            const isWeekend = isWeekendOrSummer();
             const schedule = busSchedule[routeKey];
-            const times = isWeekend ? schedule.weekends : schedule.weekdays;
+            const times = schedule.times;
 
             if (!times || times.length === 0) {
                 return { next: null, nextMinutes: Infinity, currentMinutes, remaining: [] };
             }
 
-            let nextTime = null;
+            let nextEntry = null;
             let nextMinutes = Infinity;
 
-            for (const t of times) {
-                const mins = parseTime(t);
+            for (const entry of times) {
+                const mins = parseTime(entry.time);
                 if (mins > currentMinutes && mins < nextMinutes) {
                     nextMinutes = mins;
-                    nextTime = t;
+                    nextEntry = entry;
                 }
             }
 
-            const remaining = times.filter(t => parseTime(t) > currentMinutes);
-            return { next: nextTime, nextMinutes, currentMinutes, remaining };
+            const remaining = times.filter(entry => parseTime(entry.time) > currentMinutes);
+            return { next: nextEntry, nextMinutes, currentMinutes, remaining };
         }
 
         function formatMinutesDiff(currentMinutes, nextMinutes) {
@@ -1273,28 +1326,41 @@
             return diff;
         }
 
+        function getTypeColorClass(typeCode) {
+            if (typeCode === 'S') return 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300';
+            if (typeCode === 'T') return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300';
+            return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300';
+        }
+
+        function getTypeLabel(typeCode, typeName) {
+            if (typeCode === 'S') return translations[currentLang].busTypeSchool || 'School Bus';
+            if (typeCode === 'T') return translations[currentLang].busTypeTaxi || 'Taxi';
+            return translations[currentLang].busTypeShuttle || 'Shuttle';
+        }
+
         function renderBusSchedule() {
             const route = busSchedule[currentBusRoute];
-            const isWeekend = isWeekendOrSummer();
-            const times = isWeekend ? route.weekends : route.weekdays;
+            const times = route.times;
             const { next, nextMinutes, currentMinutes } = getNextBus(currentBusRoute);
 
-            const dayLabelKey = isWeekend ? 'weekendSchedule' : 'weekdaySchedule';
-            const dayLabel = translations[currentLang][dayLabelKey] || (isWeekend ? 'Weekends & Summer' : 'Weekdays');
-            busDayTypeBadge.textContent = dayLabel;
+            // Show today's date
+            const taiwanTime = getTaiwanTime();
+            const dateStr = `${taiwanTime.getFullYear()}/${taiwanTime.getMonth() + 1}/${taiwanTime.getDate()}`;
+            const dateLabel = translations[currentLang].busDateLabel || 'Today';
+            busDayTypeBadge.textContent = `${dateLabel}: ${dateStr}`;
 
             const routeName = route.name[currentLang] || route.name.en;
             const diff = formatMinutesDiff(currentMinutes, nextMinutes);
 
             // Countdown color logic
             const countdownBox = document.getElementById('busCountdownBox');
-            if (diff !== null) {
+            if (diff !== null && next) {
                 busCountdown.textContent = String(diff);
                 busCountdownLabel.textContent = translations[currentLang].minutesUntil || 'min';
                 const minText = translations[currentLang].minutesUntil || 'min';
-                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next} (${diff} ${minText}) ${routeName}`;
+                const typeLabel = getTypeLabel(next.typeCode, next.typeName);
+                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next.time} (${diff} ${minText}) ${routeName} · ${typeLabel} · ${next.company}`;
 
-                // Apply color based on time remaining
                 countdownBox.className = 'rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center border transition-colors duration-300 ' +
                     (diff <= 2
                         ? 'bg-red-50/80 dark:bg-red-900/20 border-red-200 dark:border-red-800/50'
@@ -1315,8 +1381,11 @@
                         : 'text-emerald-600 dark:text-emerald-400');
             } else {
                 busCountdown.textContent = '--';
-                busCountdownLabel.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
-                busNextSummary.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
+                const fallbackText = busCsvError
+                    ? (translations[currentLang].busError || 'Failed to load schedule')
+                    : (translations[currentLang].noMoreBuses || 'No more buses today');
+                busCountdownLabel.textContent = fallbackText;
+                busNextSummary.textContent = fallbackText;
                 countdownBox.className = 'bg-gray-50/80 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300';
                 busCountdown.className = 'text-2xl sm:text-4xl font-black text-gray-700 dark:text-gray-300 tracking-tight transition-colors duration-300';
                 busCountdownLabel.className = 'text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mt-1 transition-colors duration-300';
@@ -1326,22 +1395,34 @@
                 busDepartures.removeChild(busDepartures.firstChild);
             }
             if (times && times.length > 0) {
-                times.forEach(t => {
-                    const tMins = parseTime(t);
+                times.forEach(entry => {
+                    const tMins = parseTime(entry.time);
                     const isPast = tMins <= currentMinutes;
-                    const isNext = t === next;
+                    const isNext = next && entry.time === next.time && entry.company === next.company && entry.typeCode === next.typeCode;
                     const el = document.createElement('div');
-                    el.className = `flex items-center justify-center px-1 py-1 sm:px-2 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-medium transition-colors
+                    el.className = `flex flex-col items-center justify-center px-1 py-1 sm:px-2 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-medium transition-colors gap-0.5
                         ${isNext ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 font-bold' :
-                        isPast ? 'bg-gray-50 dark:bg-gray-800/30 text-gray-400 dark:text-gray-600 line-through' :
+                        isPast ? 'bg-gray-50 dark:bg-gray-800/30 text-gray-400 dark:text-gray-600 line-through opacity-60' :
                         'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700/50'}`;
-                    el.textContent = t;
+                    const typeColor = getTypeColorClass(entry.typeCode);
+                    const typeLabel = getTypeLabel(entry.typeCode, entry.typeName);
+                    el.innerHTML = `
+                        <span class="font-bold leading-tight">${entry.time}</span>
+                        <div class="flex items-center gap-0.5 leading-tight" title="${typeLabel} · ${entry.company}">
+                            <span class="px-0.5 rounded text-[7px] sm:text-[8px] font-bold ${typeColor}">${entry.typeCode || '?'}</span>
+                            <span class="text-[7px] sm:text-[8px] text-gray-500 dark:text-gray-400">${entry.company}</span>
+                        </div>
+                    `;
                     busDepartures.appendChild(el);
                 });
             } else {
                 const emptyMsg = document.createElement('p');
                 emptyMsg.className = 'col-span-full text-center text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 py-2';
-                emptyMsg.textContent = translations[currentLang].noMoreBuses || 'No service today';
+                emptyMsg.textContent = busCsvError
+                    ? (translations[currentLang].busError || 'Failed to load schedule')
+                    : busCsvLoaded
+                    ? (translations[currentLang].noMoreBuses || 'No service today')
+                    : (translations[currentLang].busLoading || 'Loading...');
                 busDepartures.appendChild(emptyMsg);
             }
         }
@@ -1388,8 +1469,7 @@
         });
 
         // --- Initialization ---
-        window.onload = () => {
-            // Sync theme with device preference
+        window.onload = async () => {
             if (isDark) {
                 htmlRoot.classList.add('dark');
                 iconSun.classList.add('hidden');
@@ -1402,6 +1482,10 @@
             updateLanguage();
             fetchStats();
             initCanvas();
+            await fetchBusSchedule();
+            if (isBusExpanded) {
+                renderBusSchedule();
+            }
         };
     </script>
 </body>
