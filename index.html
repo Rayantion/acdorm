@@ -520,15 +520,27 @@
                         <div class="flex flex-wrap gap-1.5 sm:gap-2" id="busTabs" role="tablist">
                             <button data-route="main-jieren" role="tab" aria-selected="true"
                                 class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <span data-i18n="routeMainJieren">Main ↔ Jieren</span>
+                                <span data-i18n="routeMainToJieren">Main → Jieren</span>
+                            </button>
+                            <button data-route="jieren-main" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeJierenToMain">Jieren → Main</span>
                             </button>
                             <button data-route="main-jianguo" role="tab" aria-selected="false"
                                 class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <span data-i18n="routeMainJianguo">Main ↔ Jianguo</span>
+                                <span data-i18n="routeMainToJianguo">Main → Jianguo</span>
+                            </button>
+                            <button data-route="jianguo-main" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeJianguoToMain">Jianguo → Main</span>
                             </button>
                             <button data-route="jieren-jianguo" role="tab" aria-selected="false"
                                 class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <span data-i18n="routeJierenJianguo">Jieren ↔ Jianguo</span>
+                                <span data-i18n="routeJierenToJianguo">Jieren → Jianguo</span>
+                            </button>
+                            <button data-route="jianguo-jieren" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[80px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeJianguoToJieren">Jianguo → Jieren</span>
                             </button>
                         </div>
 
@@ -556,7 +568,7 @@
                                 </span>
                             </div>
                             <div id="busDepartures"
-                                class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2 max-h-[140px] sm:max-h-[180px] overflow-y-auto pr-1">
+                                class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2 max-h-[240px] sm:max-h-[320px] overflow-y-auto pr-1">
                                 <!-- Populated dynamically -->
                             </div>
                         </div>
@@ -648,11 +660,14 @@
                 noMoreBuses: "No more buses today",
                 allDepartures: "All Departures",
                 minutesUntil: "min",
-                routeMainJieren: "Main ↔ Jieren",
-                routeMainJianguo: "Main ↔ Jianguo",
-                routeJierenJianguo: "Jieren ↔ Jianguo",
+                routeMainToJieren: "Main → Jieren",
+                routeJierenToMain: "Jieren → Main",
+                routeMainToJianguo: "Main → Jianguo",
+                routeJianguoToMain: "Jianguo → Main",
+                routeJierenToJianguo: "Jieren → Jianguo",
                 routeJianguoToJieren: "Jianguo → Jieren",
-                routeNoonCircular: "Noon Circular",
+                fromLabel: "From",
+                toLabel: "To",
                 busTypeSchool: "School Bus",
                 busTypeShuttle: "Shuttle",
                 busTypeTaxi: "Taxi",
@@ -700,11 +715,14 @@
                 noMoreBuses: "今日已無班次",
                 allDepartures: "全部班次",
                 minutesUntil: "分鐘",
-                routeMainJieren: "中央 ↔ 介仁",
-                routeMainJianguo: "中央 ↔ 建國",
-                routeJierenJianguo: "介仁 ↔ 建國",
+                routeMainToJieren: "中央 → 介仁",
+                routeJierenToMain: "介仁 → 中央",
+                routeMainToJianguo: "中央 → 建國",
+                routeJianguoToMain: "建國 → 中央",
+                routeJierenToJianguo: "介仁 → 建國",
                 routeJianguoToJieren: "建國 → 介仁",
-                routeNoonCircular: "中午環線試辦",
+                fromLabel: "出發",
+                toLabel: "抵達",
                 busTypeSchool: "校車",
                 busTypeShuttle: "交通車",
                 busTypeTaxi: "計程車",
@@ -1185,19 +1203,19 @@
         // --- Bus Schedule ---
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSyxijKX2m27fSmnP5b1nEYvR3HU6lGeVbIEYbG_5bVew6rF-3VWWjYwxJbwaH8llF-msq8L20De_hJ/pub?output=csv';
 
+        const LOCATIONS = {
+            main: { en: 'Main', zh: '中央' },
+            jieren: { en: 'Jieren', zh: '介仁' },
+            jianguo: { en: 'Jianguo', zh: '建國' }
+        };
+
         let busSchedule = {
-            'main-jieren': {
-                name: { en: 'Main ↔ Jieren', zh: '中央 ↔ 介仁' },
-                times: []
-            },
-            'main-jianguo': {
-                name: { en: 'Main ↔ Jianguo', zh: '中央 ↔ 建國' },
-                times: []
-            },
-            'jieren-jianguo': {
-                name: { en: 'Jieren ↔ Jianguo', zh: '介仁 ↔ 建國' },
-                times: []
-            }
+            'main-jieren': { from: 'main', to: 'jieren', times: [] },
+            'jieren-main': { from: 'jieren', to: 'main', times: [] },
+            'main-jianguo': { from: 'main', to: 'jianguo', times: [] },
+            'jianguo-main': { from: 'jianguo', to: 'main', times: [] },
+            'jieren-jianguo': { from: 'jieren', to: 'jianguo', times: [] },
+            'jianguo-jieren': { from: 'jianguo', to: 'jieren', times: [] }
         };
         let busCsvLoaded = false;
         let busCsvError = false;
@@ -1233,6 +1251,11 @@
             return h * 60 + m;
         }
 
+        function getLocationKey(colIndex) {
+            const map = { 7: 'main', 8: 'jieren', 9: 'jianguo', 10: 'jieren', 11: 'main', 12: 'jieren', 13: 'jianguo' };
+            return map[colIndex] || null;
+        }
+
         async function fetchBusSchedule() {
             try {
                 const response = await fetch(CSV_URL);
@@ -1240,13 +1263,11 @@
                 const csvText = await response.text();
                 const lines = csvText.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
 
-                // Reset schedules
                 for (const key in busSchedule) {
                     busSchedule[key].times = [];
                 }
 
                 const todayStr = getTodayDateString();
-                const todayRows = [];
 
                 for (let i = 1; i < lines.length; i++) {
                     const line = lines[i].trim();
@@ -1257,30 +1278,59 @@
                     const dateStr = cols[2] ? cols[2].trim() : '';
                     if (dateStr !== todayStr) continue;
 
-                    const mainTime = cols[7] ? cols[7].trim() : '';
-                    const jierenTime = cols[8] ? cols[8].trim() : '';
-                    const jianguoTime = cols[9] ? cols[9].trim() : '';
                     const company = cols[14] ? cols[14].trim() : '';
                     const typeCode = cols[15] ? cols[15].trim() : '';
                     const typeName = cols[16] ? cols[16].trim() : '';
 
-                    const entryBase = { company, typeCode, typeName };
+                    // Build trip sequence from columns H-N (indices 7-13)
+                    const stops = [];
+                    for (let c = 7; c <= 13; c++) {
+                        const timeVal = cols[c] ? cols[c].trim() : '';
+                        if (timeVal) {
+                            const loc = getLocationKey(c);
+                            if (loc) stops.push({ time: timeVal, location: loc });
+                        }
+                    }
 
-                    if (mainTime) {
-                        busSchedule['main-jieren'].times.push({ ...entryBase, time: mainTime });
-                        busSchedule['main-jianguo'].times.push({ ...entryBase, time: mainTime });
+                    // Create directional entries from consecutive stops
+                    for (let s = 0; s < stops.length - 1; s++) {
+                        const from = stops[s].location;
+                        const to = stops[s + 1].location;
+                        if (from === to) continue;
+                        const routeKey = `${from}-${to}`;
+                        if (busSchedule[routeKey]) {
+                            busSchedule[routeKey].times.push({
+                                time: stops[s].time,
+                                company,
+                                typeCode,
+                                typeName,
+                                from,
+                                to
+                            });
+                        }
                     }
-                    if (jierenTime) {
-                        busSchedule['main-jieren'].times.push({ ...entryBase, time: jierenTime });
-                        busSchedule['jieren-jianguo'].times.push({ ...entryBase, time: jierenTime });
-                    }
-                    if (jianguoTime) {
-                        busSchedule['main-jianguo'].times.push({ ...entryBase, time: jianguoTime });
-                        busSchedule['jieren-jianguo'].times.push({ ...entryBase, time: jianguoTime });
+
+                    // Add indirect routes: main-jianguo and jianguo-main
+                    const hasMain = stops.some(s => s.location === 'main');
+                    const hasJianguo = stops.some(s => s.location === 'jianguo');
+                    if (hasMain && hasJianguo) {
+                        for (const stop of stops) {
+                            if (stop.location === 'main') {
+                                busSchedule['main-jianguo'].times.push({
+                                    time: stop.time, company, typeCode, typeName,
+                                    from: 'main', to: 'jianguo'
+                                });
+                            }
+                            if (stop.location === 'jianguo') {
+                                busSchedule['jianguo-main'].times.push({
+                                    time: stop.time, company, typeCode, typeName,
+                                    from: 'jianguo', to: 'main'
+                                });
+                            }
+                        }
                     }
                 }
 
-                // Sort times within each route
                 for (const key in busSchedule) {
                     busSchedule[key].times.sort((a, b) => parseTime(a.time) - parseTime(b.time));
                 }
@@ -1343,14 +1393,18 @@
             const times = route.times;
             const { next, nextMinutes, currentMinutes } = getNextBus(currentBusRoute);
 
+            const fromName = LOCATIONS[route.from][currentLang] || LOCATIONS[route.from].en;
+            const toName = LOCATIONS[route.to][currentLang] || LOCATIONS[route.to].en;
+
             // Show today's date
             const taiwanTime = getTaiwanTime();
             const dateStr = `${taiwanTime.getFullYear()}/${taiwanTime.getMonth() + 1}/${taiwanTime.getDate()}`;
             const dateLabel = translations[currentLang].busDateLabel || 'Today';
             busDayTypeBadge.textContent = `${dateLabel}: ${dateStr}`;
 
-            const routeName = route.name[currentLang] || route.name.en;
             const diff = formatMinutesDiff(currentMinutes, nextMinutes);
+            const fromLabel = translations[currentLang].fromLabel || 'From';
+            const toLabel = translations[currentLang].toLabel || 'To';
 
             // Countdown color logic
             const countdownBox = document.getElementById('busCountdownBox');
@@ -1359,7 +1413,7 @@
                 busCountdownLabel.textContent = translations[currentLang].minutesUntil || 'min';
                 const minText = translations[currentLang].minutesUntil || 'min';
                 const typeLabel = getTypeLabel(next.typeCode, next.typeName);
-                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next.time} (${diff} ${minText}) ${routeName} · ${typeLabel} · ${next.company}`;
+                busNextSummary.textContent = `${fromLabel}: ${fromName} | ${toLabel}: ${toName} | ${translations[currentLang].nextBus || 'Next'}: ${next.time} (${diff}${minText}) · ${typeLabel} · ${next.company}`;
 
                 countdownBox.className = 'rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center border transition-colors duration-300 ' +
                     (diff <= 2
@@ -1385,7 +1439,7 @@
                     ? (translations[currentLang].busError || 'Failed to load schedule')
                     : (translations[currentLang].noMoreBuses || 'No more buses today');
                 busCountdownLabel.textContent = fallbackText;
-                busNextSummary.textContent = fallbackText;
+                busNextSummary.textContent = `${fromLabel}: ${fromName} | ${toLabel}: ${toName} | ${fallbackText}`;
                 countdownBox.className = 'bg-gray-50/80 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300';
                 busCountdown.className = 'text-2xl sm:text-4xl font-black text-gray-700 dark:text-gray-300 tracking-tight transition-colors duration-300';
                 busCountdownLabel.className = 'text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mt-1 transition-colors duration-300';
@@ -1406,8 +1460,11 @@
                         'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700/50'}`;
                     const typeColor = getTypeColorClass(entry.typeCode);
                     const typeLabel = getTypeLabel(entry.typeCode, entry.typeName);
+                    const entryFrom = LOCATIONS[entry.from] ? (LOCATIONS[entry.from][currentLang] || LOCATIONS[entry.from].en) : '';
+                    const entryTo = LOCATIONS[entry.to] ? (LOCATIONS[entry.to][currentLang] || LOCATIONS[entry.to].en) : '';
                     el.innerHTML = `
                         <span class="font-bold leading-tight">${entry.time}</span>
+                        <span class="text-[7px] sm:text-[8px] text-gray-500 dark:text-gray-400 leading-tight">${entryFrom}→${entryTo}</span>
                         <div class="flex items-center gap-0.5 leading-tight" title="${typeLabel} · ${entry.company}">
                             <span class="px-0.5 rounded text-[7px] sm:text-[8px] font-bold ${typeColor}">${entry.typeCode || '?'}</span>
                             <span class="text-[7px] sm:text-[8px] text-gray-500 dark:text-gray-400">${entry.company}</span>
