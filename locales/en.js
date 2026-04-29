@@ -33,6 +33,7 @@ const TRANSLATIONS_EN = {
     busHide: "Hide Bus Schedule",
     nextBus: "Next Bus",
     noMoreBuses: "No more buses today",
+    noBusSchedule: "No bus schedule",
     allDepartures: "All Departures",
     minutesUntil: "min",
     routeMainToJieren: "Main → Jieren",

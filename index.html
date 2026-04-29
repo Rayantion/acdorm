@@ -1419,27 +1419,37 @@
             } else {
                 const emptyMsg = document.createElement('p');
                 emptyMsg.className = 'col-span-full text-center text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 py-2';
-                emptyMsg.textContent = busCsvError
-                    ? (translations[currentLang].busError || 'Failed to load schedule')
-                    : busCsvLoaded
-                    ? (translations[currentLang].noMoreBuses || 'No service today')
-                    : (translations[currentLang].busLoading || 'Loading...');
+                const hasScheduleForDate = busScheduleDates[currentBusDate] !== undefined;
+                if (busCsvError) {
+                    emptyMsg.textContent = translations[currentLang].busError || 'Failed to load schedule';
+                } else if (!hasScheduleForDate) {
+                    emptyMsg.textContent = translations[currentLang].noBusSchedule || 'No bus schedule';
+                } else if (busCsvLoaded) {
+                    emptyMsg.textContent = translations[currentLang].noMoreBuses || 'No service today';
+                } else {
+                    emptyMsg.textContent = translations[currentLang].busLoading || 'Loading...';
+                }
                 busDepartures.appendChild(emptyMsg);
             }
         }
 
+        function getDateStringFromOffset(daysOffset) {
+            const t = getTaiwanTime();
+            const d = new Date(t.getFullYear(), t.getMonth(), t.getDate() + daysOffset);
+            return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+        }
+
         function updateBusDateTabsUI() {
             const todayStr = getTodayDateString();
-            // Compute tomorrow's date string
-            const t = getTaiwanTime();
-            const tomorrow = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
-            const tomorrowStr = `${tomorrow.getFullYear()}/${tomorrow.getMonth() + 1}/${tomorrow.getDate()}`;
+            const tomorrowStr = getDateStringFromOffset(1);
+            const dayAfterStr = getDateStringFromOffset(2);
 
-            const dateKeys = Object.keys(busScheduleDates).sort();
+            // Build list of next 3 days that have schedule data
+            const targetDates = [todayStr, tomorrowStr, dayAfterStr].filter(d => busScheduleDates[d]);
             const dateButtons = busDateTabs.querySelectorAll('.bus-date-tab');
 
             dateButtons.forEach((btn, index) => {
-                const dateStr = dateKeys[index];
+                const dateStr = targetDates[index];
                 if (dateStr) {
                     btn.style.display = '';
                     let label;

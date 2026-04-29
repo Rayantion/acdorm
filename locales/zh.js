@@ -33,6 +33,7 @@ const TRANSLATIONS_ZH = {
     busHide: "隱藏校車時刻",
     nextBus: "下一班車",
     noMoreBuses: "今日已無班次",
+    noBusSchedule: "無班次",
     allDepartures: "全部班次",
     minutesUntil: "分鐘",
     routeMainToJieren: "中央 → 介仁",

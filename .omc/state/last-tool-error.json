@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"mkdir -p /mnt/c/claude/repo/acdorm/locales\",\"description\":\"Create locales directory\"}",
+  "error": "Exit code 1\nmkdir: cannot create directory '/mnt': Permission denied",
+  "timestamp": "2026-04-29T15:14:40.504Z",
+  "retry_count": 1
+}
