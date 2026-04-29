@@ -519,32 +519,36 @@
                         <!-- Route Tabs -->
                         <div class="flex flex-wrap gap-1.5 sm:gap-2" id="busTabs" role="tablist">
                             <button data-route="main-jieren" role="tab" aria-selected="true"
-                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeMainJieren">Main ↔ Jieren</span>
                             </button>
                             <button data-route="main-jianguo" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeMainJianguo">Main ↔ Jianguo</span>
                             </button>
                             <button data-route="jieren-jianguo" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeJierenJianguo">Jieren ↔ Jianguo</span>
                             </button>
+                            <button data-route="jianguo-to-jieren" role="tab" aria-selected="false"
+                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span data-i18n="routeJianguoToJieren">Jianguo → Jieren</span>
+                            </button>
                             <button data-route="noon-circular" role="tab" aria-selected="false"
-                                class="bus-tab flex-1 min-w-[80px] px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                class="bus-tab flex-1 min-w-[72px] px-1.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold transition-all bg-gray-100 text-gray-600 dark:bg-gray-800/60 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span data-i18n="routeNoonCircular">Noon Circular</span>
                             </button>
                         </div>
 
                         <!-- Next Bus Countdown -->
-                        <div
-                            class="bg-emerald-50/80 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center">
-                            <p class="text-[10px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1"
+                        <div id="busCountdownBox"
+                            class="bg-emerald-50/80 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300">
+                            <p class="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1"
                                 data-i18n="nextBus">Next Bus</p>
-                            <div id="busCountdown" class="text-2xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-300 tracking-tight">
+                            <div id="busCountdown" class="text-2xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-300 tracking-tight transition-colors duration-300">
                                 --
                             </div>
-                            <p id="busCountdownLabel" class="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                            <p id="busCountdownLabel" class="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 mt-1 transition-colors duration-300">
                                 --
                             </p>
                         </div>
@@ -655,6 +659,7 @@
                 routeMainJieren: "Main ↔ Jieren",
                 routeMainJianguo: "Main ↔ Jianguo",
                 routeJierenJianguo: "Jieren ↔ Jianguo",
+                routeJianguoToJieren: "Jianguo → Jieren",
                 routeNoonCircular: "Noon Circular",
                 weekdaySchedule: "Weekdays",
                 weekendSchedule: "Weekends & Summer",
@@ -700,6 +705,7 @@
                 routeMainJieren: "中央 ↔ 介仁",
                 routeMainJianguo: "中央 ↔ 建國",
                 routeJierenJianguo: "介仁 ↔ 建國",
+                routeJianguoToJieren: "建國 → 介仁",
                 routeNoonCircular: "中午環線試辦",
                 weekdaySchedule: "平日班次",
                 weekendSchedule: "假日及暑期班次",
@@ -1193,6 +1199,11 @@
                 name: { en: 'Noon Circular', zh: '中午環線試辦' },
                 weekdays: ['13:00', '13:30'],
                 weekends: []
+            },
+            'jianguo-to-jieren': {
+                name: { en: 'Jianguo → Jieren', zh: '建國 → 介仁' },
+                weekdays: ['07:55', '08:45', '12:35', '13:25', '17:05', '17:55', '18:45'],
+                weekends: ['08:15', '12:15', '17:15']
             }
         };
 
@@ -1206,6 +1217,7 @@
         const busTabs = document.getElementById('busTabs');
         const busCountdown = document.getElementById('busCountdown');
         const busCountdownLabel = document.getElementById('busCountdownLabel');
+        const busCountdownBox = document.getElementById('busCountdownBox');
         const busDepartures = document.getElementById('busDepartures');
         const busDayTypeBadge = document.getElementById('busDayTypeBadge');
         const busNextSummary = document.getElementById('busNextSummary');
@@ -1272,15 +1284,41 @@
 
             const routeName = route.name[currentLang] || route.name.en;
             const diff = formatMinutesDiff(currentMinutes, nextMinutes);
+
+            // Countdown color logic
+            const countdownBox = document.getElementById('busCountdownBox');
             if (diff !== null) {
                 busCountdown.textContent = String(diff);
                 busCountdownLabel.textContent = translations[currentLang].minutesUntil || 'min';
                 const minText = translations[currentLang].minutesUntil || 'min';
                 busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next} (${diff} ${minText}) ${routeName}`;
+
+                // Apply color based on time remaining
+                countdownBox.className = 'rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center border transition-colors duration-300 ' +
+                    (diff <= 2
+                        ? 'bg-red-50/80 dark:bg-red-900/20 border-red-200 dark:border-red-800/50'
+                        : diff <= 5
+                        ? 'bg-amber-50/80 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/50'
+                        : 'bg-emerald-50/80 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/50');
+                busCountdown.className = 'text-2xl sm:text-4xl font-black tracking-tight transition-colors duration-300 ' +
+                    (diff <= 2
+                        ? 'text-red-700 dark:text-red-300'
+                        : diff <= 5
+                        ? 'text-amber-700 dark:text-amber-300'
+                        : 'text-emerald-700 dark:text-emerald-300');
+                busCountdownLabel.className = 'text-[10px] sm:text-xs mt-1 transition-colors duration-300 ' +
+                    (diff <= 2
+                        ? 'text-red-600 dark:text-red-400'
+                        : diff <= 5
+                        ? 'text-amber-600 dark:text-amber-400'
+                        : 'text-emerald-600 dark:text-emerald-400');
             } else {
                 busCountdown.textContent = '--';
                 busCountdownLabel.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
                 busNextSummary.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
+                countdownBox.className = 'bg-gray-50/80 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300';
+                busCountdown.className = 'text-2xl sm:text-4xl font-black text-gray-700 dark:text-gray-300 tracking-tight transition-colors duration-300';
+                busCountdownLabel.className = 'text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mt-1 transition-colors duration-300';
             }
 
             while (busDepartures.firstChild) {
