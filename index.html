@@ -153,7 +153,7 @@
 </head>
 
 <body
-    class="bg-gray-50/90 dark:bg-[#0f172a]/95 text-gray-900 dark:text-gray-100 font-sans h-[100dvh] w-screen flex flex-col items-center justify-center p-2 sm:p-4 transition-colors duration-300 relative overflow-hidden">
+    class="bg-gray-50/90 dark:bg-[#0f172a]/95 text-gray-900 dark:text-gray-100 font-sans min-h-[100dvh] w-screen flex flex-col items-center p-2 sm:p-4 transition-colors duration-300 relative">
 
     <!-- GitHub Repository Link -->
     <a href="https://github.com/Rayantion/acdorm" target="_blank" aria-label="View on GitHub"
@@ -163,13 +163,13 @@
                 d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
                 clip-rule="evenodd" />
         </svg>
-        <span class="text-[10px] sm:text-xs font-bold tracking-wide">Give stars!!</span>
+        <span class="text-[10px] sm:text-xs font-bold tracking-wide" data-i18n="githubStars">Give stars!!</span>
     </a>
 
     <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <main class="w-full max-w-5xl z-10 flex flex-col items-center justify-center h-full min-h-0 relative overflow-y-auto pb-20">
+    <main class="w-full max-w-5xl z-10 flex flex-col items-center justify-center h-full min-h-0 relative pb-20">
 
         <!-- Main Layout Container -->
         <div
@@ -604,14 +604,7 @@
         <div id="footerContent"
             class="max-w-3xl mx-auto overflow-hidden transition-all duration-300 ease-in-out opacity-40 hover:opacity-100 max-h-[20px] md:max-h-[100px] cursor-pointer md:cursor-auto">
             <p class="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 leading-tight mb-1">
-                <strong>About Jieren Campus AC Monitor:</strong> This is an independent utility tool designed
-                specifically for students living in the <strong>Tzu Chi University (TCU) Jieren Campus</strong>
-                dormitories. Easily track your room air conditioning balances, check valid room credits, and stay
-                updated on daily campus AC usage.
-            </p>
-            <p class="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 leading-tight mb-1">
-                <strong>關於慈大介仁校區冷氣查詢：</strong>
-                本系統專為<strong>慈濟大學介仁校區</strong>住宿生設計，提供即時的介仁宿舍冷氣電費餘額查詢服務，幫助您輕鬆掌握冷氣儲值金狀態與校園用電數據。
+                <strong data-i18n="aboutTitle">About Jieren Campus AC Monitor:</strong> <span data-i18n="aboutText">This is an independent utility tool designed specifically for students living in the Tzu Chi University (TCU) Jieren Campus dormitories. Easily track your room air conditioning balances, check valid room credits, and stay updated on daily campus AC usage.</span>
             </p>
         </div>
 
@@ -632,124 +625,16 @@
         </p>
     </div>
 
+    <!-- Locale Files -->
+    <script src="locales/en.js"></script>
+    <script src="locales/zh.js"></script>
+
     <!-- Application Script -->
     <script>
         // --- Translations ---
         const translations = {
-            en: {
-                title: "AC Status Portal",
-                campusBadge: "Jieren Campus",
-                subtitle: "Monitor dormitory air conditioning credits instantly.",
-                dormTypeLabel: "Dormitory Sex Type",
-                maleDorm: "Male Dorm",
-                femaleDorm: "Female Dorm",
-                roomNumLabel: "Room Number",
-                placeholder: "e.g. A101",
-                valid: "Valid",
-                invalid: "Invalid",
-                btnCheck: "Check AC Credits",
-                btnConnecting: "Connecting...",
-                creditsLeft: "AC Credits Left",
-                room: "Room",
-                currency: "元",
-                errProxy: "Cannot connect to the server. Try accessing from campus, or the server may be offline.",
-                errFetch: "Failed to fetch data. Please check your connection.",
-                errNotFound: "Room Not Registered. The room number you entered does not exist in the system.",
-                tcuSystem: "TCU System",
-                moodleSystem: "Moodle",
-                lateForm: "Late Arrive Form",
-                contactMe: "Contact Me",
-                statsTitle: "Live Usage Stats",
-                statsTotal: "Total",
-                statsMonthly: "This Month",
-                statsThisWeek: "This Week",
-                statsToday: "Today",
-                releaseDate: "Released since 2026/09/03",
-                readMore: "Read more...",
-                busSchedule: "Bus Schedule",
-                busToggle: "Show Bus Schedule",
-                busHide: "Hide Bus Schedule",
-                nextBus: "Next Bus",
-                noMoreBuses: "No more buses today",
-                allDepartures: "All Departures",
-                minutesUntil: "min",
-                routeMainToJieren: "Main → Jieren",
-                routeJierenToMain: "Jieren → Main",
-                routeMainToJianguo: "Main → Jianguo",
-                routeJianguoToMain: "Jianguo → Main",
-                routeJierenToJianguo: "Jieren → Jianguo",
-                routeJianguoToJieren: "Jianguo → Jieren",
-                fromLabel: "From",
-                toLabel: "To",
-                busTypeSchool: "School Bus",
-                busTypeShuttle: "Shuttle",
-                busTypeTaxi: "Taxi",
-                busError: "Failed to load schedule",
-                busLoading: "Loading...",
-                busDateLabel: "Today",
-                today: "Today",
-                scheduleForDate: "Schedule",
-                weekdaySchedule: "Weekdays",
-                weekendSchedule: "Weekends & Summer",
-                busNote: "Schedules subject to change. Check official TCU notices."
-            },
-            zh: {
-                title: "冷氣餘額查詢",
-                campusBadge: "限介仁校區",
-                subtitle: "即時監控宿舍冷氣電費餘額。",
-                dormTypeLabel: "宿舍類型",
-                maleDorm: "男生宿舍",
-                femaleDorm: "女生宿舍",
-                roomNumLabel: "房間號碼",
-                placeholder: "例如: A201",
-                valid: "格式正確",
-                invalid: "格式錯誤",
-                btnCheck: "查詢冷氣餘額",
-                btnConnecting: "連線中...",
-                creditsLeft: "冷氣剩餘金額",
-                room: "房號",
-                currency: "元",
-                errProxy: "無法連線至伺服器。請嘗試在校內網路下查詢，或伺服器可能離線中。",
-                errFetch: "獲取資料失敗，請檢查您的網路連線狀態。",
-                errNotFound: "查無此房號。您輸入的房號不存在於系統中。",
-                tcuSystem: "TCU 校務系統",
-                moodleSystem: "Moodle 學習系統",
-                lateForm: "晚歸請假表單",
-                contactMe: "聯絡我",
-                statsTitle: "即時查詢統計",
-                statsTotal: "總計",
-                statsMonthly: "本月",
-                statsThisWeek: "本週",
-                statsToday: "今日",
-                releaseDate: "自 2026/09/03 上線",
-                readMore: "顯示更多...",
-                busSchedule: "校車時刻表",
-                busToggle: "顯示校車時刻",
-                busHide: "隱藏校車時刻",
-                nextBus: "下一班車",
-                noMoreBuses: "今日已無班次",
-                allDepartures: "全部班次",
-                minutesUntil: "分鐘",
-                routeMainToJieren: "中央 → 介仁",
-                routeJierenToMain: "介仁 → 中央",
-                routeMainToJianguo: "中央 → 建國",
-                routeJianguoToMain: "建國 → 中央",
-                routeJierenToJianguo: "介仁 → 建國",
-                routeJianguoToJieren: "建國 → 介仁",
-                fromLabel: "出發",
-                toLabel: "抵達",
-                busTypeSchool: "校車",
-                busTypeShuttle: "交通車",
-                busTypeTaxi: "計程車",
-                busError: "載入失敗",
-                busLoading: "載入中...",
-                busDateLabel: "今日",
-                today: "今日",
-                scheduleForDate: "班次",
-                weekdaySchedule: "平日班次",
-                weekendSchedule: "假日及暑期班次",
-                busNote: "時刻表僅供參考，請以慈濟大學官方公告為準。"
-            }
+            en: TRANSLATIONS_EN,
+            zh: TRANSLATIONS_ZH
         };
 
         // --- State Variables ---
@@ -1362,6 +1247,7 @@
                 // Default to today if available, else first available date
                 currentBusDate = busScheduleDates[todayStr] ? todayStr : Object.keys(busScheduleDates)[0] || '';
                 setBusDate(currentBusDate, false);
+                updateBusDateTabsUI();
 
                 busCsvLoaded = true;
                 busCsvError = false;
@@ -1544,6 +1430,11 @@
 
         function updateBusDateTabsUI() {
             const todayStr = getTodayDateString();
+            // Compute tomorrow's date string
+            const t = getTaiwanTime();
+            const tomorrow = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
+            const tomorrowStr = `${tomorrow.getFullYear()}/${tomorrow.getMonth() + 1}/${tomorrow.getDate()}`;
+
             const dateKeys = Object.keys(busScheduleDates).sort();
             const dateButtons = busDateTabs.querySelectorAll('.bus-date-tab');
 
@@ -1551,9 +1442,16 @@
                 const dateStr = dateKeys[index];
                 if (dateStr) {
                     btn.style.display = '';
-                    btn.textContent = dateStr === todayStr
-                        ? (translations[currentLang].today || 'Today')
-                        : dateStr;
+                    let label;
+                    if (dateStr === todayStr) {
+                        label = translations[currentLang].today || 'Today';
+                    } else if (dateStr === tomorrowStr) {
+                        label = translations[currentLang].tomorrow || 'Tomorrow';
+                    } else {
+                        const parts = dateStr.split('/');
+                        label = parts.length >= 3 ? `${parts[1]}/${parts[2]}` : dateStr;
+                    }
+                    btn.textContent = label;
                     btn.dataset.dateValue = dateStr;
                     const isActive = dateStr === currentBusDate;
                     btn.className = isActive
