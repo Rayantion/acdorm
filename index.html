@@ -1210,9 +1210,15 @@
         const busDayTypeBadge = document.getElementById('busDayTypeBadge');
         const busNextSummary = document.getElementById('busNextSummary');
 
-        function isWeekendOrSummer() {
+        function getTaiwanTime() {
             const now = new Date();
-            const day = now.getDay();
+            const taiwanStr = now.toLocaleString('en-US', { timeZone: 'Asia/Taipei' });
+            return new Date(taiwanStr);
+        }
+
+        function isWeekendOrSummer() {
+            const taiwanTime = getTaiwanTime();
+            const day = taiwanTime.getDay();
             return day === 0 || day === 6;
         }
 
@@ -1222,8 +1228,8 @@
         }
 
         function getNextBus(routeKey) {
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const taiwanTime = getTaiwanTime();
+            const currentMinutes = taiwanTime.getHours() * 60 + taiwanTime.getMinutes();
             const isWeekend = isWeekendOrSummer();
             const schedule = busSchedule[routeKey];
             const times = isWeekend ? schedule.weekends : schedule.weekdays;
@@ -1264,12 +1270,13 @@
             const dayLabel = translations[currentLang][dayLabelKey] || (isWeekend ? 'Weekends & Summer' : 'Weekdays');
             busDayTypeBadge.textContent = dayLabel;
 
+            const routeName = route.name[currentLang] || route.name.en;
             const diff = formatMinutesDiff(currentMinutes, nextMinutes);
             if (diff !== null) {
                 busCountdown.textContent = String(diff);
                 busCountdownLabel.textContent = translations[currentLang].minutesUntil || 'min';
                 const minText = translations[currentLang].minutesUntil || 'min';
-                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next} (${diff} ${minText})`;
+                busNextSummary.textContent = `${translations[currentLang].nextBus || 'Next Bus'}: ${next} (${diff} ${minText}) ${routeName}`;
             } else {
                 busCountdown.textContent = '--';
                 busCountdownLabel.textContent = translations[currentLang].noMoreBuses || 'No more buses today';
