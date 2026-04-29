@@ -177,7 +177,7 @@
 
             <!-- Left Column Container -->
             <div
-                class="w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[480px] flex flex-col gap-4 sm:gap-6 shrink-0 relative z-20 justify-center">
+                class="w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[480px] flex flex-col gap-4 sm:gap-6 shrink-0 relative z-20 justify-center mt-8 lg:mt-0">
 
                 <!-- Header (Moved above the box) -->
                 <div
@@ -488,7 +488,7 @@
                         class="w-full flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 text-left focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-inset rounded-2xl sm:rounded-3xl">
                         <div class="flex items-center gap-2 sm:gap-3">
                             <div class="p-1.5 sm:p-2 bg-emerald-100/90 dark:bg-emerald-900/40 rounded-lg sm:rounded-xl">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400"
+                                <svg id="busIcon" class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect x="3" y="6" width="18" height="12" rx="2"/>
@@ -547,7 +547,7 @@
                         <!-- Next Bus Countdown -->
                         <div id="busCountdownBox"
                             class="bg-emerald-50/80 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300">
-                            <p class="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1"
+                            <p id="busNextLabel" class="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1"
                                 data-i18n="nextBus">Next Bus</p>
                             <div id="busCountdown" class="text-2xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-300 tracking-tight transition-colors duration-300">
                                 --
@@ -1234,6 +1234,9 @@
         const busDepartures = document.getElementById('busDepartures');
         const busDayTypeBadge = document.getElementById('busDayTypeBadge');
         const busNextSummary = document.getElementById('busNextSummary');
+        const busCard = document.getElementById('busCard');
+        const busIcon = document.getElementById('busIcon');
+        const busNextLabel = document.getElementById('busNextLabel');
 
         function getTaiwanTime() {
             const now = new Date();
@@ -1433,6 +1436,11 @@
                         : diff <= 5
                         ? 'text-amber-600 dark:text-amber-400'
                         : 'text-emerald-600 dark:text-emerald-400');
+
+                // Update bus card border, icon, and label colors
+                busCard.style.borderColor = diff <= 2 ? '#ef4444' : diff <= 5 ? '#eab308' : '#10b981';
+                busIcon.style.color = diff <= 2 ? '#f87171' : diff <= 5 ? '#facc15' : '#34d399';
+                busNextLabel.style.color = diff <= 2 ? '#f87171' : diff <= 5 ? '#facc15' : '#34d399';
             } else {
                 busCountdown.textContent = '--';
                 const fallbackText = busCsvError
@@ -1443,6 +1451,9 @@
                 countdownBox.className = 'bg-gray-50/80 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700/50 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-center transition-colors duration-300';
                 busCountdown.className = 'text-2xl sm:text-4xl font-black text-gray-700 dark:text-gray-300 tracking-tight transition-colors duration-300';
                 busCountdownLabel.className = 'text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mt-1 transition-colors duration-300';
+                busCard.style.borderColor = '';
+                busIcon.style.color = '';
+                busNextLabel.style.color = '';
             }
 
             while (busDepartures.firstChild) {
