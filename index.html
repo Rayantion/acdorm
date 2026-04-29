@@ -1224,8 +1224,9 @@
 
         function getTaiwanTime() {
             const now = new Date();
-            const taiwanStr = now.toLocaleString('en-US', { timeZone: 'Asia/Taipei' });
-            return new Date(taiwanStr);
+            // Convert local time to UTC, then add Taiwan offset (UTC+8)
+            const utcMs = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+            return new Date(utcMs + 8 * 60 * 60 * 1000);
         }
 
         function isWeekendOrSummer() {
