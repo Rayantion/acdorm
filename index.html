@@ -9,7 +9,10 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="zh-TW, en">
     <meta name="author" content="TCU Dormitory Management">
-    
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.codetabs.com https://api.allorigins.win https://corsproxy.io https://docs.google.com https://acdorm.pres26aaron.workers.dev http://203.72.75.10:808; img-src 'self' data:;">
+
     <!-- Open Graph Meta Tags for Social Sharing & SEO -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.jieren.my.id/">
@@ -974,7 +977,7 @@
                 stats = await res.json();
             } catch (err) {
                 try {
-                    let proxyRes = await fetch(proxyUrl, { method: 'GET', credentials: 'include' });
+                    let proxyRes = await fetch(proxyUrl, { method: 'GET' });
                     if (proxyRes.ok) stats = await proxyRes.json();
                 } catch (proxyErr) {
                     console.warn("Stats fetch skipped.");
@@ -1467,13 +1470,26 @@
                     const typeColor = getTypeColorClass(entry.typeCode);
                     const typeLabel = getTypeLabel(entry.typeCode, entry.typeName);
                     const companyLabel = getCompanyLabel(entry.company);
-                    el.innerHTML = `
-                        <span class="font-bold text-xs sm:text-sm leading-tight">${entry.time}</span>
-                        <div class="flex items-center gap-0.5 leading-tight" title="${typeLabel} · ${entry.company}">
-                            <span class="px-1 rounded text-[10px] sm:text-xs font-bold ${typeColor}">${entry.typeCode || '?'}</span>
-                            <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">${companyLabel}</span>
-                        </div>
-                    `;
+                    const timeSpan = document.createElement('span');
+                    timeSpan.className = 'font-bold text-xs sm:text-sm leading-tight';
+                    timeSpan.textContent = entry.time;
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'flex items-center gap-0.5 leading-tight';
+                    infoDiv.title = `${typeLabel} · ${entry.company}`;
+
+                    const typeBadge = document.createElement('span');
+                    typeBadge.className = `px-1 rounded text-[10px] sm:text-xs font-bold ${typeColor}`;
+                    typeBadge.textContent = entry.typeCode || '?';
+
+                    const companySpan = document.createElement('span');
+                    companySpan.className = 'text-[10px] sm:text-xs text-gray-500 dark:text-gray-400';
+                    companySpan.textContent = companyLabel;
+
+                    infoDiv.appendChild(typeBadge);
+                    infoDiv.appendChild(companySpan);
+                    el.appendChild(timeSpan);
+                    el.appendChild(infoDiv);
                     busDepartures.appendChild(el);
                 });
             } else {
