@@ -26,7 +26,7 @@ const TRANSLATIONS_ZH = {
     statsMonthly: "本月",
     statsThisWeek: "本週",
     statsToday: "今日",
-    releaseDate: "自 2026/09/03 上線",
+    releaseDate: "自 2026/03/09 上線",
     readMore: "顯示更多...",
     busSchedule: "校車時刻表",
     busToggle: "顯示校車時刻",

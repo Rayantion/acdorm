@@ -26,7 +26,7 @@ const TRANSLATIONS_EN = {
     statsMonthly: "This Month",
     statsThisWeek: "This Week",
     statsToday: "Today",
-    releaseDate: "Released since 2026/09/03",
+    releaseDate: "Released since 2026/03/09",
     readMore: "Read more...",
     busSchedule: "Bus Schedule",
     busToggle: "Show Bus Schedule",

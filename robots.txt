@@ -1,5 +1,14 @@
 User-agent: *
 Allow: /
 
-# Tells search engines where to find your map
+# Sitemap location
 Sitemap: https://www.jieren.my.id/sitemap.xml
+
+# TzuChi Bus Schedule - SEO/GEO/AIO optimization
+# Target keywords: 慈濟巴士, TzuChi bus schedule, 慈濟大學校車, 慈大校車, 介仁校車
+# Allow all search engines to index bus schedule content
+Allow: /?lang=zh
+Allow: /?lang=en
+
+# Crawl rate optimization
+Crawl-delay: 1
