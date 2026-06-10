@@ -910,29 +910,19 @@
             let success = false;
             let textData = "";
 
-            const proxies = [
-                `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
-            ];
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
 
             try {
-                for (const proxyUrl of proxies) {
-                    try {
-                        const response = await fetch(proxyUrl);
-                        if (response.ok) {
-                            textData = await response.text();
-                            if (textData && textData.includes('剩餘金額')) {
-                                success = true;
-                                break;
-                            } else if (textData && textData.includes('查無此房號')) {
-                                throw new Error(translations[currentLang].errNotFound);
-                            }
-                        }
-                    } catch (err) {
-                        if (err.message === translations[currentLang].errNotFound) throw err;
-                        console.warn("Proxy failed:", proxyUrl);
+                const response = await fetch(proxyUrl);
+                if (response.ok) {
+                    textData = await response.text();
+                    if (textData && textData.includes('剩餘金額')) {
+                        success = true;
+                    } else if (textData && textData.includes('查無此房號')) {
+                        throw new Error(translations[currentLang].errNotFound);
                     }
+                } else {
+                    console.warn("Proxy returned non-OK:", response.status);
                 }
 
                 if (!success) throw new Error(translations[currentLang].errProxy);
