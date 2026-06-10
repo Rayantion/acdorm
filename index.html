@@ -11,7 +11,7 @@
     <meta name="author" content="TCU Dormitory Management">
 
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.codetabs.com https://api.allorigins.win https://corsproxy.io https://docs.google.com https://*.googleusercontent.com https://acdorm.pres26aaron.workers.dev http://203.72.75.10:808; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.cors.lol https://api.codetabs.com https://api.allorigins.win https://corsproxy.io https://docs.google.com https://*.googleusercontent.com https://acdorm.pres26aaron.workers.dev http://203.72.75.10:808; img-src 'self' data:;">
 
     <!-- Open Graph Meta Tags for Social Sharing & SEO -->
     <meta property="og:type" content="website">
@@ -910,7 +910,7 @@
             let success = false;
             let textData = "";
 
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+            const proxyUrl = `https://api.cors.lol/?url=${encodeURIComponent(targetUrl)}`;
 
             try {
                 const response = await fetch(proxyUrl);
