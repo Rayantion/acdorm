@@ -915,7 +915,8 @@
             let success = false;
             let textData = "";
 
-            for (const proxyUrl of proxies) {
+            try {
+                for (const proxyUrl of proxies) {
                 try {
                     const response = await fetch(proxyUrl);
                     if (!response.ok) continue;
