@@ -918,7 +918,7 @@
             try {
                 const fetchWithTimeout = async (proxyUrl) => {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 15000);
+                    const timeoutId = setTimeout(() => controller.abort(), 3000);
                     try {
                         const response = await fetch(proxyUrl, { signal: controller.signal });
                         clearTimeout(timeoutId);
