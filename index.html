@@ -910,10 +910,8 @@
             let success = false;
             let textData = "";
 
-            const proxyUrl = `https://api.cors.lol/?url=${encodeURIComponent(targetUrl)}`;
-
             try {
-                const response = await fetch(proxyUrl);
+                const response = await fetch(targetUrl);
                 if (response.ok) {
                     textData = await response.text();
                     if (textData && textData.includes('剩餘金額')) {
