@@ -916,42 +916,43 @@
             let textData = "";
 
             try {
-                for (const proxyUrl of proxies) {
-                try {
-                    const response = await fetch(proxyUrl);
-                    if (!response.ok) continue;
-                    
-                    let currentData = await response.text();
-                    
-                    // Smart unwrap if proxy returns JSON (e.g., allorigins/get)
-                    if (currentData.trim().startsWith('{')) {
-                        try {
-                            const jsonData = JSON.parse(currentData);
-                            if (jsonData.contents) {
-                                currentData = jsonData.contents;
-                            }
-                        } catch (e) {
-                            // ignore json parse error, treat as raw text
+                const fetchWithTimeout = async (proxyUrl) => {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 3000);
+                    try {
+                        const response = await fetch(proxyUrl, { signal: controller.signal });
+                        clearTimeout(timeoutId);
+                        if (!response.ok) throw new Error("Proxy error");
+                        
+                        let currentData = await response.text();
+                        if (currentData.trim().startsWith('{')) {
+                            try {
+                                const jsonData = JSON.parse(currentData);
+                                if (jsonData.contents) currentData = jsonData.contents;
+                            } catch (e) {}
                         }
-                    }
 
-                    if (currentData && currentData.includes('剩餘金額')) {
-                        textData = currentData;
-                        success = true;
-                        break;
-                    } else if (currentData && currentData.includes('查無此房號')) {
-                        throw new Error(translations[currentLang].errNotFound);
-                    }
-                } catch (e) {
-                    // if it's the custom "errNotFound" error, throw it immediately
-                    if (e.message === translations[currentLang].errNotFound) {
+                        if (currentData && currentData.includes('剩餘金額')) {
+                            return { text: currentData };
+                        } else if (currentData && currentData.includes('查無此房號')) {
+                            return { error: translations[currentLang].errNotFound };
+                        } else {
+                            throw new Error("Invalid format");
+                        }
+                    } catch (e) {
+                        clearTimeout(timeoutId);
                         throw e;
                     }
-                    console.warn(`Proxy ${proxyUrl} failed:`, e);
-                }
-            }
+                };
 
-            if (!success) throw new Error(translations[currentLang].errProxy);
+                const result = await Promise.any(proxies.map(proxyUrl => fetchWithTimeout(proxyUrl)));
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                } else {
+                    textData = result.text;
+                    success = true;
+                }
 
                 // Parse Result
                 const match = textData.match(/[\d.]+/);
