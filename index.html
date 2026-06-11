@@ -907,52 +907,23 @@
             const formattedRoomID = roomID;
             const targetUrl = `http://203.72.75.10:808/Dormitory/GetRoomInfoByID?ID=${formattedRoomID}&SEX=${dormType}`;
 
-            const proxies = [
-                `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
-                `https://api.cors.lol/?url=${encodeURIComponent(targetUrl)}`
-            ];
+            const proxyUrl = `https://ac-proxy.pres26aaron.workers.dev/?url=${encodeURIComponent(targetUrl)}`;
 
             let success = false;
             let textData = "";
 
             try {
-                const fetchWithTimeout = async (proxyUrl) => {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 3000);
-                    try {
-                        const response = await fetch(proxyUrl, { signal: controller.signal });
-                        clearTimeout(timeoutId);
-                        if (!response.ok) throw new Error("Proxy error");
-                        
-                        let currentData = await response.text();
-                        if (currentData.trim().startsWith('{')) {
-                            try {
-                                const jsonData = JSON.parse(currentData);
-                                if (jsonData.contents) currentData = jsonData.contents;
-                            } catch (e) {}
-                        }
-
-                        if (currentData && currentData.includes('剩餘金額')) {
-                            return { text: currentData };
-                        } else if (currentData && currentData.includes('查無此房號')) {
-                            return { error: translations[currentLang].errNotFound };
-                        } else {
-                            throw new Error("Invalid format");
-                        }
-                    } catch (e) {
-                        clearTimeout(timeoutId);
-                        throw e;
+                const response = await fetch(proxyUrl);
+                if (response.ok) {
+                    textData = await response.text();
+                    if (textData && textData.includes('剩餘金額')) {
+                        success = true;
+                    } else if (textData && textData.includes('查無此房號')) {
+                        throw new Error(translations[currentLang].errNotFound);
                     }
-                };
-
-                const result = await Promise.any(proxies.map(proxyUrl => fetchWithTimeout(proxyUrl)));
-                
-                if (result.error) {
-                    throw new Error(result.error);
-                } else {
-                    textData = result.text;
-                    success = true;
                 }
+
+                if (!success) throw new Error(translations[currentLang].errProxy);
 
                 // Parse Result
                 const match = textData.match(/[\d.]+/);
