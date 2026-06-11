@@ -907,25 +907,50 @@
             const formattedRoomID = roomID;
             const targetUrl = `http://203.72.75.10:808/Dormitory/GetRoomInfoByID?ID=${formattedRoomID}&SEX=${dormType}`;
 
+            const proxies = [
+                `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+                `https://api.cors.lol/?url=${encodeURIComponent(targetUrl)}`
+            ];
+
             let success = false;
             let textData = "";
 
-            const proxyUrl = `https://api.cors.lol/?url=${encodeURIComponent(targetUrl)}`;
+            for (const proxyUrl of proxies) {
+                try {
+                    const response = await fetch(proxyUrl);
+                    if (!response.ok) continue;
+                    
+                    let currentData = await response.text();
+                    
+                    // Smart unwrap if proxy returns JSON (e.g., allorigins/get)
+                    if (currentData.trim().startsWith('{')) {
+                        try {
+                            const jsonData = JSON.parse(currentData);
+                            if (jsonData.contents) {
+                                currentData = jsonData.contents;
+                            }
+                        } catch (e) {
+                            // ignore json parse error, treat as raw text
+                        }
+                    }
 
-            try {
-                const response = await fetch(proxyUrl);
-                if (response.ok) {
-                    textData = await response.text();
-                    if (textData && textData.includes('剩餘金額')) {
+                    if (currentData && currentData.includes('剩餘金額')) {
+                        textData = currentData;
                         success = true;
-                    } else if (textData && textData.includes('查無此房號')) {
+                        break;
+                    } else if (currentData && currentData.includes('查無此房號')) {
                         throw new Error(translations[currentLang].errNotFound);
                     }
-                } else {
-                    console.warn("Proxy returned non-OK:", response.status);
+                } catch (e) {
+                    // if it's the custom "errNotFound" error, throw it immediately
+                    if (e.message === translations[currentLang].errNotFound) {
+                        throw e;
+                    }
+                    console.warn(`Proxy ${proxyUrl} failed:`, e);
                 }
+            }
 
-                if (!success) throw new Error(translations[currentLang].errProxy);
+            if (!success) throw new Error(translations[currentLang].errProxy);
 
                 // Parse Result
                 const match = textData.match(/[\d.]+/);
